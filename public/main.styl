@@ -1,26 +1,34 @@
 *
     box-sizing border-box
+    
+absolute(l=false, t=false, r=false, b=false)
+    position absolute
+    unless l is false
+        left l
+    unless t is false
+        top t
+    unless r is false
+        right r
+    unless b is false
+        bottom b
+        
 .reset
     margin 0
     padding 0
     border 0
 body
     @extend .reset
-    font-family sans-serif
+    font 10px sans-serif
     outline 1px dashed purple
 #top
+    absolute(t:0, l:0)
     width 398px
     height 218px
-    position absolute
-    top 0
-    left 0
     overflow hidden
     outline 1px dashed red
 #bottom
-    position absolute
+    absolute(t:218px, l:39px)
     width 320px
     height 212px
-    top 218px
-    left 39px
-    overflow hidden
+    overflow scroll
     outline 1px dashed green
