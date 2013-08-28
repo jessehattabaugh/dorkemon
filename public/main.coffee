@@ -30,10 +30,21 @@ loadButton.addEventListener("click", () ->
     img.src = document.getElementById("imageUrl").value
 )
 
-###
-socket = io.connect('http://localhost')
-socket.on('news', (data)-> 
-    console.log(data)
-    socket.emit('my other event', { my: 'data' })
+
+socket = io.connect()
+
+pingButton = document.getElementById("pingButton")
+
+socket.on('connect', () ->
+    #alert("connected to socket");
+    pingButton.disabled = ''
 )
-###
+
+socket.on('pong', (data) -> 
+    alert('server says pong!')
+)
+
+pingButton.addEventListener('click', () ->
+    console.log('pingging the server')
+    socket.emit('ping', { my: 'data' })
+)
