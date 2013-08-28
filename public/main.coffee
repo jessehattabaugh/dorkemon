@@ -6,7 +6,7 @@ scroll3DS = () ->
     false
     
 if(window.is3DS) 
-    #alert("You're on a 3DS!")
+    alert("You're on a 3DS!")
     scroll3DS()
     
 window.addEventListener("keydown",  (e) ->
@@ -14,8 +14,26 @@ window.addEventListener("keydown",  (e) ->
     e.preventDefault()
 )
 
+loadButton = document.getElementById("loadImage")
+
+loadButton.addEventListener("click", () ->
+    #alert("Loading Image")
+    loadButton.value = "Loading..."
+    loadButton.disabled = "disabled"
+    ctx = document.getElementById("topScreen").getContext("2d")
+    img = new Image # First create the image...
+    img.onload = () ->
+        #alert("loaded image (w: #{img.width}, h:#{img.height})")
+        loadButton.value = "Load Image"
+        loadButton.disabled = ""
+        ctx.drawImage(img, 0, 0)
+    img.src = document.getElementById("imageUrl").value
+)
+
+###
 socket = io.connect('http://localhost')
 socket.on('news', (data)-> 
     console.log(data)
     socket.emit('my other event', { my: 'data' })
 )
+###

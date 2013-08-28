@@ -16,19 +16,30 @@ absolute(l=false, t=false, r=false, b=false)
     margin 0
     padding 0
     border 0
+.strike
+    text-decoration line-through
 body
     @extend .reset
     font 10px sans-serif
-    outline 1px dashed purple
-#top
+    color #333
+    //outline 1px dashed purple
+    background black
+#topScreen
     absolute(t:0, l:0)
     width 398px
     height 218px
     overflow hidden
     outline 1px dashed red
-#bottom
+    background #333
+#bottomScreen
     absolute(t:218px, l:39px)
     width 320px
     height 212px
     overflow scroll
     outline 1px dashed green
+    background silver
+    h1
+        text-align center
+        border-bottom 1px solid #999
+    #imageUrl
+        display block

@@ -1,12 +1,18 @@
-canvas#top
+canvas#topScreen
     
     
-#bottom
+#bottomScreen
     h1 Dorkemon
     p This is my attempt to create a browser based game for the Nintendo 3DS
     
+    label Image URL
+        input(type="text", value="http://www.wiizelda.net/images/oos/Link.png", id="imageUrl")
+    
+    input(id="loadImage", type="submit", value="Load Image", onclick="loadImage")
+    
     h4 todo
     ul
-        li draw something to canvas
-        li 
-            strike get ahold of arrow keys
+        li draw a duder in the center of the image
+        li move the image around when the user presses the d-pad
+        li.strike draw something to canvas
+        li.strike get ahold of arrow keys

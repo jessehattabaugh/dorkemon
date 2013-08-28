@@ -1,5 +1,5 @@
-//var app = require('harp').server(__dirname, { port: process.env.PORT || 5000 }),
-//    io = require('socket.io').listen(app);
+var app = require('harp').server(__dirname, { port: process.env.PORT || 5000 }),
+    io = require('socket.io').listen(app);
     
 /*    Harp.io 
 var express = require("express");
@@ -32,6 +32,7 @@ io.sockets.on('connection', function (socket) {
 });
 */
 
+/*
 var express = require("express"),
     harp = require("harp"),
     app = express(),
@@ -44,5 +45,6 @@ app.configure(function(){
 });
 
 app.listen(port);
+*/
     
 console.log("Server started");
