@@ -22,14 +22,19 @@ io.configure(function () {
 io.on('connection', function(socket){
     console.log("Connection started.");
     
-    socket.on('ping', function(){
-        console.log("PING");
-        io.sockets.emit('pong', {my: 'data'});
+    socket.on('join', function(data){
+        //console.log(data);
+        io.sockets.emit('joined', data);
     });
     
-    socket.on('disconnect', function() {
-        console.log("Connection stopped.");
-        io.sockets.emit('someone left');
+    socket.on('say', function(data){
+        //console.dir(data);
+        io.sockets.emit('hear', data);
+    });
+    
+    socket.on('disconnect', function(data) {
+        //console.log("Connection stopped.");
+        io.sockets.emit('left', data);
     });
 });
 

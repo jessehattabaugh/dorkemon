@@ -2,19 +2,41 @@ canvas#topScreen
     
     
 #bottomScreen
-    h1 Dorkemon
-    p This is my attempt to create a browser based game for the Nintendo 3DS
+    menu 
+        command.icon-home(data-bind="click: function(){ tab('home') }")
+        command.icon-bubbles(data-bind="click: function(){ tab('chat') }")
+        command.icon-image(data-bind="click: function(){ tab('image') }")
+        command.icon-hammer(data-bind="click: function(){ tab('hammer') }")
+        
+    section#home(data-bind="visible: tab() == 'home', skipBinding: true")
+        h1 Dorkemon
+        p This is my attempt to create a browser based game for the Nintendo 3DS
+        
+    section#image(data-bind="visible: tab() == 'image', skipBinding: true")
+        h1 Load Image
+        label Image URL
+            input(type="text", value="http://www.wiizelda.net/images/oos/Link.png", id="imageUrl")
+        input(id="loadImage", type="submit", value="Load Image", onclick="loadImage")
+        
+    section#chat(data-bind="visible: tab() == 'chat', skipBinding: true")
+        h1 Chat
+        #chatView
+            form(data-bind="visible: !name(), submit: setName")
+                label Your Name
+                    input(type="text", data-bind="value: name")
+                input(type="submit")
+            
+            form(data-bind="visible: name(), submit: say")
+                input(id="chatMsg", type="text", data-bind="value: msg")
+                input(id="chatSubmit", type="submit", value="say")
+                dl(data-bind="foreach: log")
+                    dt(data-bind="text: name")
+                    dd(data-bind="text: msg")
     
-    label Image URL
-        input(type="text", value="http://www.wiizelda.net/images/oos/Link.png", id="imageUrl")
-    
-    input(id="loadImage", type="submit", value="Load Image", onclick="loadImage")
-    
-    button(id="pingButton", disabled="disabled") Ping
-    
-    h4 todo
-    ul
-        li draw a duder in the center of the image
-        li move the image around when the user presses the d-pad
-        li.strike draw something to canvas
-        li.strike get ahold of arrow keys
+    section#todo(data-bind="visible: tab() == 'todo', skipBinding: true")
+        h1 todo
+        ul
+            li draw a duder in the center of the image
+            li move the image around when the user presses the d-pad
+            li.strike draw something to canvas
+            li.strike get ahold of arrow keys
