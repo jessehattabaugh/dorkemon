@@ -2,16 +2,17 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-var harp = require("harp");
+
+app.get('/', function(req, res){
+    console.log("serving the client.html");
+    res.sendfile('client.html');
+});
 
 var PORT = process.env.PORT || 5000;
+server.listen(PORT);
+console.log("Server started on port" + PORT);
 
-app.configure(function(){
-    
-    // Harp integration
-    app.use(express.static(__dirname + "/public"));
-    app.use(harp.pipeline(__dirname + "/public"));
-});
+/* Socket.io Stuff ***********************************************************/
 
 // Heroku compatibility
 io.configure(function () { 
@@ -37,7 +38,3 @@ io.on('connection', function(socket){
         io.sockets.emit('left', data);
     });
 });
-
-server.listen(PORT);
-
-console.log("Server started on port " + PORT);

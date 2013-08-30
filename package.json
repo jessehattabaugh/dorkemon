@@ -4,7 +4,6 @@
   "description": "A Harp App on Heroku",
   "dependencies": {
     "express": "3.3.x",
-    "harp": "0.8.x",
     "socket.io": "0.9.x"
   },
   "engines": {
