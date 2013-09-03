@@ -174,16 +174,15 @@
             "></div>
         </nav>
         
+            <input id="name" type="text">
+            <input type="button" onclick="addPlayer()">
+        
     </div>
     
-    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js" type="text/javascript"></script>
+    <!--<script src="/socket.io/socket.io.js" type="text/javascript"></script>-->
+    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <!--<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js" type="text/javascript"></script>-->
     <script type="text/javascript">
-        
-        // just preventing some JSLint warnings
-        if(typeof ko === 'undefined') var ko = {};
-        if(typeof io === 'undefined') var io = {};
-        
         //  little bit of useragent sniffing never hurt anybody
         window.is3DS = navigator.userAgent.indexOf("3DS") >= 0;
         function scroll3DS() {
@@ -192,84 +191,12 @@
           setTimeout(scroll3DS, 30);
         }
         if (window.is3DS) scroll3DS();
-        else alert("This site is meant to be viewed on a Nintendo 3DS");
         
-        /*window.addEventListener("keydown", function(e) {
-          var _ref;
-          if (((_ref = e.which) === 37 || _ref === 38 || _ref === 39 || _ref === 40 || _ref === 13)) {
-            //alert(e.which);
-            e.preventDefault();
-          }
-        });*/
-        
-        var loadButton = document.getElementById("loadImage");
-        
-        loadButton.addEventListener("click", function() {
-          var ctx, img;
-          loadButton.value = "Loading...";
-          loadButton.disabled = "disabled";
-          ctx = document.getElementById("topScreen").getContext("2d");
-          img = new Image();
-          img.onload = function() {
-            loadButton.value = "Load Image";
-            loadButton.disabled = "";
-            ctx.drawImage(img, 0, 0);
-          };
-          img.src = document.getElementById("imageUrl").value;
-        });
-        
-        // a custom binding to allow for nested Views
-        ko.bindingHandlers.skipBinding = {
-            init: function() {
-                return { controlsDescendantBindings: true };
-            }
-        };
-        
-        function BottomScreenModel(){
-            this.tab = ko.observable('home');
+        var fb = new Firebase('https://dorkemon.firebaseio.com/');
+        var players = fb.child('players');
+        function addPlayer(){
+            players.push({name: document.getElementById('name').value});
         }
-        ko.applyBindings(new BottomScreenModel(), document.getElementById('bottomScreen'));
-        
-        function ChatModel() {
-            var chatModel = this;
-            this.nameField = ko.observable('');
-            this.name = ko.observable('');
-            this.connected = ko.observable(false);
-            this.people = ko.observableArray();
-            this.log = ko.observableArray();
-            this.msg = ko.observable('');
-            this.setName = function(data, event) {
-                this.name(this.nameField());
-                this.socket.emit('join', {name: this.name()});
-            };
-            this.say = function(data, event){
-                this.socket.emit('say', {
-                    name: this.name(),
-                    msg: this.msg()
-                });
-                this.msg('');
-            };
-            this.socket = io.connect();
-            //this.socket = {on: function(){}}
-            
-            this.socket.on('connect', function () {
-                //alert("connected to socket");
-                chatModel.connected(true);
-            });
-            this.socket.on('joined', function (data) {
-                //alert('someone joined chat');
-                chatModel.people.push(data.name);
-            });
-            this.socket.on('left', function (data) {
-                //alert('someone left chat');
-                chatModel.people.remove(data.name);
-            });
-            this.socket.on('hear', function (data) {
-                //alert('someone says');
-                chatModel.log.push(data);
-            });
-        }
-        ko.applyBindings(new ChatModel(), document.getElementById('chatView'));
 
     </script>
 </body>
