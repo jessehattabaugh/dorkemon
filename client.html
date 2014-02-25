@@ -128,9 +128,14 @@
             <h1>Dev Notes</h1>
             
             <article>
+            	<date>Feb 24th, 2014</date>
+            	<p>Today is my birthday! Got bored and decided to look into my old projects. I still like this one, because it was a lot of fun to see my app on a 3DS. However, the 3DS browser isn't ideal. The zoom sometimes breaks and socket.io's long polling leaves the progress spinner spinning. I may start another repo just to have a clean break since I did make some progress in building a webapp that runs on a 3DS browser. I think I'll just use the standard HTML5 Joypad API instead.</p>
+            </article>
+            
+            <article>
                 <date>Aug 30th, 2013</date>
                 
-                <p>I started this project using a Node tool called <a href="http://harpjs.com">Harp</a> to preprocess my html css and javascript. I use Sass at work and have played with Jade as well and there's something nice about their simple syntax. Since Harp can also process CoffeScript I decided to give it a shot as well. Well that was a mistake. CoffeeScript did nothing but trip me up at every turn. Then I started using Knockout to manage the bottom screen interface and realized that Jade doesn't support multiline attributes which makes my data-binds hard to read. Then I realized that if I'm using Knockout to generate dynamic elements, I might as well just inline the styles for those elements. So I yanked all the generated code from their disparate files and put them in a single HTML file.</p>
+                <p>I started this project using a Node tool called <a href="http://harpjs.com">Harp</a> to preprocess my html css and javascript. I use Sass at work and have played with Jade as well and there's something nice about their simple syntax. Since Harp can also process CoffeeScript I decided to give it a shot as well. Well that was a mistake. CoffeeScript did nothing but trip me up at every turn. Then I started using Knockout to manage the bottom screen interface and realized that Jade doesn't support multiline attributes which makes my data-binds hard to read. Then I realized that if I'm using Knockout to generate dynamic elements, I might as well just inline the styles for those elements. So I yanked all the generated code from their disparate files and put them in a single HTML file.</p>
             
                 <p>I know a lot of people will say this is a bad idea. I'll admit a single file application would  be problematic for several developers to work on at once. But this is just me, and I don't like having to keep track of what code is in what file.</p>
             </article>
